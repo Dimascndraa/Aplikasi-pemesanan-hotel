@@ -1,0 +1,32 @@
+/* Login */
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.daftar {
+  width: 100vw;
+}
+.logo {
+  width: 100px;
+}
+.lg {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .sm {
+    display: none;
+  }
+  .lg {
+    display: block;
+  }
+  .daftar {
+    width: 50vw;
+  }
+  .logo {
+    width: 300px;
+  }
+}
