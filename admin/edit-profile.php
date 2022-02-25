@@ -13,12 +13,11 @@ if ($_SESSION['level'] == "Pelanggan" || $_SESSION['level'] == "") {
 if (isset($_POST['ubah'])) {
     if (ubahProfilePetugas($_POST) > 0) {
         echo "<script>
-        alert('Data Berhasil Diubah');
-        document.location.href = '?page=profile';
+        document.location.href = './profile.php?page=profile&pesan=berhasil-ubah-profile';
         </script>";
     } else {
         echo "<script>
-        alert('Data Gagal Diubah');
+            document.location.href = '?page=profile&pesan=gagal-ubah-profile';
         </script>";
     }
 }
@@ -136,11 +135,16 @@ $level = $data['role'];
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-6 mt-2 mb-4">
+                                                <div class="col-6 mt-2">
                                                     <button class="btn btn-primary w-100 d-block m-auto" name="ubah" type="submit">Ubah</button>
                                                 </div>
-                                                <div class="col-6 mt-2 mb-4">
+                                                <div class="col-6 mt-2">
                                                     <a href="ubah-password.php" class="btn btn-primary w-100 d-block m-auto">Ubah Password</a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 mt-3 mb-4 text-center">
+                                                    <a href="profile.php">Kembali ke halaman sebelumnya</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,6 +174,47 @@ $level = $data['role'];
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == 'gagal-ubah-profile') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Profile gagal diubah!',
+                        text: 'Coba cek kembali data yang diinputkan!',
+                        footer: 'Atau mungkin anda tidak mengubah apapun'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'berhasil-ubah-password') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Password berhasil diubah!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <?php include "layout/bawah.php" ?>
 

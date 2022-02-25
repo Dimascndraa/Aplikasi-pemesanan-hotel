@@ -22,12 +22,11 @@ $hotel = query("SELECT * FROM identitas")[0];
 if (isset($_POST['ubah'])) {
     if (ubahFasilitas($_POST) > 0) {
         echo "<script>
-                alert('data berhasil diubah');
-                document.location.href = './';
-            </script>";
+                document.location.href = './data-fasilitas.php?page=data-fasilitas&pesan=berhasil-ubah-fasilitas';
+                </script>";
     } else {
         echo "<script>
-                alert('data gagal diubah');
+                document.location.href = '?page=data-fasilitas&pesan=gagal-ubah-fasilitas&id=$idFasilitas';
             </script>";
     }
 }
@@ -123,6 +122,23 @@ if (isset($_POST['ubah'])) {
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == "gagal-ubah-fasilitas") : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Fasilitas gagal diubah!',
+                        text: 'Coba cek kembali data yang diinputkan!',
+                        footer: 'Atau mungkin anda tidak mengubah apapun'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <?php include "layout/bawah.php" ?>
     <script>

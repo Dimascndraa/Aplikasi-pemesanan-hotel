@@ -76,14 +76,22 @@ function tambahPetugas($data)
 
     if (mysqli_fetch_assoc($result)) {
         echo "<script>
-            alert('Username sudah terdaftar!');
+                document.location.href = '?page=tambah-user&pesan=invalid-username';
             </script>";
+        $_SESSION['nama'] = $_POST['nama'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['jenis-kelamin'] = $_POST['jenis-kelamin'];
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['password'] = $_POST['password'];
+        $_SESSION['confirm-password'] = $_POST['confirm-password'];
+        $_SESSION['telp'] = $_POST['telp'];
+        $_SESSION['role'] = $_POST['role'];
         return false;
     }
 
     if ($password !== $konfirmasiPassword) {
         echo "<script>
-            alert('Konfirmasi password tidak sesuai');
+                document.location.href = '?page=tambah-user&pesan=invalid-password';
             </script>";
         return false;
     }
@@ -142,15 +150,21 @@ function ubahPasswordPegawai($data)
 
     if ($passwordLama !== $row['password']) {
         echo "<script>
-            alert('Password lama tidak sesuai');
+            document.location.href = '?page=profile&pesan=password-lama-salah';
             </script>";
+        $_SESSION['password'] = $_POST['password'];
+        $_SESSION['password-lama'] = $_POST['password-lama'];
+        $_SESSION['konfirmasi-password'] = $_POST['konfirmasi-password'];
         return false;
     }
 
     if ($passwordBaru !== $konfirmasiPassword) {
         echo "<script>
-            alert('Konfirmasi password tidak sesuai');
-            </script>";
+        document.location.href = './tambah-fasilitas.php?pesan=username-invalid';
+        </script>";
+        $_SESSION['password'] = $_POST['password'];
+        $_SESSION['password-lama'] = $_POST['password-lama'];
+        $_SESSION['konfirmasi-password'] = $_POST['konfirmasi-password'];
         return false;
     }
 
@@ -224,15 +238,15 @@ function daftarAkun($data)
 
     if (mysqli_fetch_assoc($result)) {
         echo "<script>
-            document.location.href = '?pesan=username-invalid';
-        </script>";
+            document.location.href = './register.php?pesan=username-invalid';
+            </script>";
         $_SESSION = $_POST;
         return false;
     }
 
     if ($password !== $konfirmasiPassword) {
         echo "<script>
-                document.location.href = '?pesan=password-invalid';
+        document.location.href = './register.php?pesan=password-invalid';
         </script>";
         $_SESSION = $_POST;
         return false;
@@ -297,15 +311,15 @@ function ubahPassword($data)
 
     if ($passwordLama !== $row['password']) {
         echo "<script>
-            alert('Password lama tidak sesuai');
-            </script>";
+        alert('Password lama tidak sesuai');
+        </script>";
         return false;
     }
 
     if ($passwordBaru !== $konfirmasiPassword) {
         echo "<script>
-            alert('Konfirmasi password tidak sesuai');
-            </script>";
+        alert('Konfirmasi password tidak sesuai');
+        </script>";
         return false;
     }
 
@@ -329,8 +343,8 @@ function uploadProfil()
 
     if ($error === 4) {
         echo "<script>
-                alert('pilih gambar terlebih dahulu');
-            </script>";
+        alert('pilih gambar terlebih dahulu');
+        </script>";
         return false;
     }
 
@@ -340,8 +354,8 @@ function uploadProfil()
 
     if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
         echo "<script>
-                    alert('Yang anda upload bukan gambar');
-                  </script>";
+        alert('Yang anda upload bukan gambar');
+        </script>";
 
         return false;
     }
@@ -778,7 +792,7 @@ function uploadFasilitas()
 
     if ($error === 4) {
         echo "<script>
-                alert('pilih gambar terlebih dahulu');
+                document.location.href = './tambah-fasilitas.php?page=tambah-fasilitas&pesan=gagal-upload-fasilitas';
             </script>";
         return false;
     }
@@ -789,15 +803,15 @@ function uploadFasilitas()
 
     if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
         echo "<script>
-                    alert('Yang anda upload bukan gambar');
+                    document.location.href = './tambah-fasilitas.php?page=tambah-fasilitas&pesan=invalid-upload-fasilitas';',
                   </script>";
 
         return false;
     }
 
-    if ($ukuranFile > 2000000) {
+    if ($ukuranFile > 1000000) {
         echo "<script>
-                    alert('Ukuran gambar terlalu besar');
+                    document.location.href = './tambah-fasilitas.php?page=tambah-fasilitas&pesan=terlalu-besar-fasilitas';',
                   </script>";
         return false;
     }

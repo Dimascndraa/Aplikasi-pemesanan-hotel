@@ -144,7 +144,7 @@ $hotel = query("SELECT * FROM identitas")[0];
 
             <li class="nav-item">
                 <a href="../logic/proses-logout.php" name="logout" class="nav-link">
-                    <i class="nav-icon fas fa-sign-out-alt" onclick="return confirm('Yakin?');"></i>
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Keluar</p>
                 </a>
             </li>

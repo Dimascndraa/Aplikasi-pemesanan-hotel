@@ -160,6 +160,32 @@ if ($data['role'] == "resepsionis") {
     </div>
     <!-- ./wrapper -->
 
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == 'berhasil-tambah-user') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Petugas berhasil ditambahkan!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
     <?php include "layout/bawah.php" ?>
 </body>
 

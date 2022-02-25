@@ -13,12 +13,11 @@ if ($_SESSION['level'] == "Pelanggan" || $_SESSION['level'] == "") {
 if (isset($_POST['ubah'])) {
     if (ubahPasswordPegawai($_POST) > 0) {
         echo "<script>
-        alert('Password Berhasil Diubah');
-        document.location.href = './';
+        document.location.href = './edit-profile.php?page=edit-profile&pesan=berhasil-ubah-password';
         </script>";
     } else {
         echo "<script>
-        alert('Password Gagal Diubah');
+        document.location.href = '?page=ubah-password&pesan=gagal-ubah-password';
         </script>";
     }
 }
@@ -27,6 +26,7 @@ $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
 $hotel = query("SELECT * FROM identitas")[0];
 $level = $data['role'];
+
 ?>
 
 <?php include 'layout/atas.php' ?>
@@ -104,17 +104,32 @@ $level = $data['role'];
                                                     <input type="hidden" name="id" value="<?= $data['id'] ?>">
                                                     <div class="mb-3">
                                                         <label for="password-lama" class="form-label fw-bold">Password Lama</label>
-                                                        <input style="background-color: #e8f0fe;" type="password" class="form-control" name="password-lama" id="password-lama" placeholder="Password Lama">
+                                                        <div class="input-group" id="show_hide_password">
+                                                            <input type="password" style="background-color: #e8f0fe;" name='password-lama' class="form-control" value="<?= @$_SESSION['password-lama'] ?>" required placeholder="Password Lama">
+                                                            <div class="input-group-append">
+                                                                <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="password" class="form-label fw-bold">Password Baru</label>
-                                                        <input style="background-color: #e8f0fe;" type="password" class="form-control" name="password" id="password" placeholder="Password Baru">
+                                                        <div class="input-group" id="show_hide_password_2">
+                                                            <input type="password" style="background-color: #e8f0fe;" name='password' class="form-control" value="<?= @$_SESSION['password'] ?>" required placeholder="Password Baru">
+                                                            <div class="input-group-append">
+                                                                <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="konfirmasi-password" class="form-label fw-bold">Konfirmasi Password Baru</label>
-                                                        <input style="background-color: #e8f0fe;" type="password" class="form-control" name="konfirmasi-password" id="konfirmasi-password" placeholder="Konfirmasi Password Baru">
+                                                        <div class="input-group" id="show_hide_password_3">
+                                                            <input type="password" style="background-color: #e8f0fe;" name='konfirmasi-password' class="form-control" value="<?= @$_SESSION['konfirmasi-password'] ?>" required placeholder="Password Lama">
+                                                            <div class="input-group-append">
+                                                                <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="row">
@@ -122,6 +137,12 @@ $level = $data['role'];
                                                             <button type="submit" name="ubah" class="btn btn-primary d-block mt-4">Ubah Password</button>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-12 mt-3 mb-4">
+                                                            <a href="edit-profile.php">Kembali ke halaman sebelumnya</a>
+                                                        </div>
+                                                    </div>
+
                                                 </form>
                                             </div>
                                         </div>
@@ -152,7 +173,91 @@ $level = $data['role'];
     </div>
     <!-- ./wrapper -->
 
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == 'gagal-ubah-password') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops..!',
+                        text: 'Password gagal diubah!',
+                        footer: 'Coba cek kembali data yang diinputkan!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'password-lama-salah') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops..!',
+                        text: 'Password gagal diubah!',
+                        footer: 'Password lama tidak sesuai!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'konfirmasi-password-salah') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops..!',
+                        text: 'Password gagal diubah!',
+                        footer: 'Konfirmasi password tidak sesuai!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
     <?php include "layout/bawah.php" ?>
+    <script>
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bi bi-eye-slash");
+                    $('#show_hide_password i').removeClass("bi bi-eye");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bi bi-eye-slash");
+                    $('#show_hide_password i').addClass("bi bi-eye");
+                }
+            });
+            $("#show_hide_password_2 a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password_2 input').attr("type") == "text") {
+                    $('#show_hide_password_2 input').attr('type', 'password');
+                    $('#show_hide_password_2 i').addClass("bi bi-eye-slash");
+                    $('#show_hide_password_2 i').removeClass("bi bi-eye");
+                } else if ($('#show_hide_password_2 input').attr("type") == "password") {
+                    $('#show_hide_password_2 input').attr('type', 'text');
+                    $('#show_hide_password_2 i').removeClass("bi bi-eye-slash");
+                    $('#show_hide_password_2 i').addClass("bi bi-eye");
+                }
+            });
+            $("#show_hide_password_3 a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password_3 input').attr("type") == "text") {
+                    $('#show_hide_password_3 input').attr('type', 'password');
+                    $('#show_hide_password_3 i').addClass("bi bi-eye-slash");
+                    $('#show_hide_password_3 i').removeClass("bi bi-eye");
+                } else if ($('#show_hide_password_3 input').attr("type") == "password") {
+                    $('#show_hide_password_3 input').attr('type', 'text');
+                    $('#show_hide_password_3 i').removeClass("bi bi-eye-slash");
+                    $('#show_hide_password_3 i').addClass("bi bi-eye");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

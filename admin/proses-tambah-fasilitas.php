@@ -9,12 +9,11 @@ include "../logic/functions.php";
 if (isset($_POST['tambah'])) {
     if (tambahFasilitas($_POST) > 0) {
         echo "<script>
-                alert('Fasilitas berhasil ditambahkan!');
-                document.location.href= 'index.php';
-                </script>";
+                document.location.href= './data-fasilitas.php?page=data-fasilitas&pesan=berhasil-tambah-fasilitas';
+              </script>";
     } else {
         echo "<script>
-                alert('Fasilitas gagal ditambahkan!');
+                document.location.href= './tambah-fasilitas.php?page=tambah-fasilitas&pesan=gagal-tambah-fasilitas';
               </script>";
     }
 }

@@ -24,8 +24,7 @@ $id = $_GET['id'];
 
 if (hapusFasilitas($id) > 0) {
     echo "<script>
-          alert('data berhasil dihapus');
-            document.location.href = '../admin/index.php';
+            document.location.href = '../admin/data-fasilitas.php?page=data-fasilitas&pesan=berhasil-hapus-fasilitas';
        </script>";
 } else {
     echo "data gagal dihapus!";

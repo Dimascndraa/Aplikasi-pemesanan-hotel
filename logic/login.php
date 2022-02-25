@@ -49,7 +49,7 @@ $hotel = query("SELECT * FROM identitas")[0];
               <form action="cek_login.php" method="post" autocomplete="off">
                 <div class="my-3">
                   <label for="username" class="form-label">Username</label>
-                  <input type="text" style="background-color: #e8f0fe;" class="form-control" name="username" id="username" placeholder="Masukkan Username">
+                  <input type="text" style="background-color: #e8f0fe;" class="form-control" name="username" id="username" placeholder="Masukkan Username" autofocus>
                 </div>
                 <div class="my-3">
                   <div class="form-group">
@@ -94,7 +94,7 @@ $hotel = query("SELECT * FROM identitas")[0];
         </script>
       </div>
     <?php endif; ?>
-    <?php if ($_GET['pesan'] == "berhasil") : ?>
+    <?php if ($_GET['pesan'] == "berhasil-logout") : ?>
       <div class="container">
         <script>
           const Toast = Swal.mixin({
@@ -111,7 +111,29 @@ $hotel = query("SELECT * FROM identitas")[0];
 
           Toast.fire({
             icon: 'success',
-            title: 'Anda berhasil Keluar!'
+            title: 'Anda berhasil logout!'
+          })
+        </script>
+      </div>
+    <?php endif; ?>
+    <?php if ($_GET['pesan'] == "daftar-berhasil") : ?>
+      <div class="container">
+        <script>
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Akun berhasil dibuat!'
           })
         </script>
       </div>

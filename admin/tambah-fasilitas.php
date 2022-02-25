@@ -102,6 +102,65 @@ if ($data['role'] == "resepsionis") {
     </div>
     <!-- ./wrapper -->
 
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == "gagal-tambah-fasilitas") : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Fasilitas gagal ditambahkan!',
+                        footer: 'Coba cek kembali data yang diinputkan'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == "gagal-upload-fasilitas") : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Fasilitas gagal ditambahkan!',
+                        footer: 'Pilih gambar terlebih dahulu'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == "invalid-upload-fasilitas") : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Fasilitas gagal ditambahkan!',
+                        footer: 'Yang anda upload bukan gambar'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == "terlalu-besar-fasilitas") : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Fasilitas gagal ditambahkan!',
+                        footer: 'Ukuran gambar terlalu besar'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <?php include "layout/bawah.php" ?>
 </body>
 

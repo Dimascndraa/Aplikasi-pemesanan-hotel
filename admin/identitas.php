@@ -17,7 +17,7 @@ if (isset($_POST['ubah'])) {
         </script>";
     } else {
         echo "<script>
-        document.location.href = './?page=dashboard&popup=ig';
+        document.location.href = '?page=identitas&popup=ig';
         </script>";
     }
 }
@@ -29,7 +29,7 @@ if (isset($_POST['sosial'])) {
         </script>";
     } else {
         echo "<script>
-        document.location.href = './?page=dashboard&popup=sg';
+        document.location.href = '?page=identitas&popup=sg';
         </script>";
     }
 }
@@ -259,6 +259,42 @@ if ($data['role'] == "resepsionis") {
     </div>
     <!-- ./wrapper -->
 
+    <?php if (isset($_GET['popup'])) : ?>
+        <?php if ($_GET['popup'] == "sg") : ?>
+            <div class="container">
+                <script>
+                    var delayInMilliseconds = 1000; //1 second
+
+                    setTimeout(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Sosial Media gagal diubah!',
+                            text: 'Coba cek kembali data yang diinputkan!',
+                            footer: 'Atau mungkin anda tidak mengubah apapun!'
+                        })
+                    }, delayInMilliseconds);
+                </script>
+                </script>
+            </div>
+        <?php endif; ?>
+        <?php if ($_GET['popup'] == "ig") : ?>
+            <div class="container">
+                <script>
+                    var delayInMilliseconds = 1000; //1 second
+
+                    setTimeout(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Identitas gagal diubah!',
+                            text: 'Coba cek kembali data yang diinputkan!',
+                            footer: 'Atau mungkin anda tidak mengubah apapun!'
+                        })
+                    }, delayInMilliseconds);
+                </script>
+                </script>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
     <?php include "layout/bawah.php" ?>
 </body>
 

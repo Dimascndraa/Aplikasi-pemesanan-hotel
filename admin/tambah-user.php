@@ -26,8 +26,7 @@ if ($data['role'] == "") {
 if (isset($_POST['tambah'])) {
     if (tambahPetugas($_POST) > 0) {
         echo "<script>
-            alert('Data berhasil ditambahkan!');
-            document.location.href= './';
+            document.location.href= './data-user.php?page=data-user&pesan=berhasil-tambah-user';
         </script>";
     } else {
         echo "<script>
@@ -82,7 +81,7 @@ if (isset($_POST['tambah'])) {
                                     <label for="nama" class="form-label">Nama Lengkap</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input required type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap">
+                                    <input required style="background-color: #e8f0fe;" type="text" class="form-control" value="<?= @$_SESSION['nama'] ?>" name="nama" id="nama" placeholder="Nama Lengkap">
                                 </div>
                             </div>
 
@@ -91,7 +90,7 @@ if (isset($_POST['tambah'])) {
                                     <label for="email" class="form-label">Email</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input required type="email" class="form-control" name="email" id="email" placeholder="cth: dimasbomz13@gmail.com">
+                                    <input required style="background-color: #e8f0fe;" type="email" class="form-control" value="<?= @$_SESSION['email'] ?>" name="email" id="email" placeholder="cth: dimasbomz13@gmail.com">
                                 </div>
                             </div>
 
@@ -100,7 +99,7 @@ if (isset($_POST['tambah'])) {
                                     <label for="username" class="form-label">Username</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input required type="text" class="form-control" name="username" id="username" placeholder="Username">
+                                    <input required style="background-color: #e8f0fe;" type="text" class="form-control" value="<?= @$_SESSION['username'] ?>" name="username" id="username" placeholder="Username">
                                 </div>
                             </div>
 
@@ -109,7 +108,12 @@ if (isset($_POST['tambah'])) {
                                     <label for="password" class="form-label">Password</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input required type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                    <div class="input-group" id="show_hide_password">
+                                        <input type="password" name='password' class="form-control" value="<?= @$_SESSION['password'] ?>" required style="background-color: #e8f0fe;" placeholder="Password">
+                                        <div class="input-group-append">
+                                            <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -118,7 +122,12 @@ if (isset($_POST['tambah'])) {
                                     <label for="confirm-password" class="form-label">Konfirmasi Password</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input required type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Konfirmasi Password">
+                                    <div class="input-group" id="show_hide_password_2">
+                                        <input type="password" name='confirm-password' class="form-control" value="<?= @$_SESSION['confirm-password'] ?>" required style="background-color: #e8f0fe;" placeholder="Konfirmasi Password">
+                                        <div class="input-group-append">
+                                            <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -127,7 +136,7 @@ if (isset($_POST['tambah'])) {
                                     <label for="telp" class="form-label">No. Telepon</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input required type="telp" class="form-control" name="telp" id="telp" placeholder="cth: +6283809192165">
+                                    <input required style="background-color: #e8f0fe;" type="telp" class="form-control" value="<?= @$_SESSION['telp'] ?>" name="telp" id="telp" placeholder="cth: +6283809192165">
                                 </div>
                             </div>
 
@@ -136,10 +145,10 @@ if (isset($_POST['tambah'])) {
                                     <label for="jenis-kelamin" class="form-label">Jenis Kelamin</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <select name="jenis-kelamin" id="jenis-kelamin" required class="form-select">
+                                    <select name="jenis-kelamin" id="jenis-kelamin" required style="background-color: #e8f0fe;" class="form-select">
                                         <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
-                                        <option value="laki-laki">Laki-laki</option>
-                                        <option value="perempuan">Perempuan</option>
+                                        <option value="laki-laki" <?= $_SESSION['jenis-kelamin'] == 'laki-laki' ? "selected" : "" ?>>Laki-laki</option>
+                                        <option value="perempuan" <?= $_SESSION['jenis-kelamin'] == 'perempuan' ? "selected" : "" ?>>Perempuan</option>
                                     </select>
                                 </div>
                             </div>
@@ -149,10 +158,10 @@ if (isset($_POST['tambah'])) {
                                     <label for="role" class="form-label">Role</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <select name="role" id="role" required class="form-select">
+                                    <select name="role" id="role" required style="background-color: #e8f0fe;" class="form-select">
                                         <option value="" selected disabled>-- Pilih Role --</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="resepsionis">Resepsionis</option>
+                                        <option value="admin" <?= $_SESSION['role'] == 'admin' ? "selected" : "" ?>>Admin</option>
+                                        <option value="resepsionis" <?= $_SESSION['role'] == 'resepsionis' ? "selected" : "" ?>>Resepsionis</option>
                                     </select>
                                 </div>
                             </div>
@@ -186,7 +195,66 @@ if (isset($_POST['tambah'])) {
     </div>
     <!-- ./wrapper -->
 
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == 'invalid-username') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops..!',
+                        text: 'Username sudah tersedia!',
+                        footer: 'Silahkan cari username yang lain'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'invalid-password') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops..!',
+                        text: 'Konfirmasi password tidak sama!',
+                        footer: 'Cek kembali password dan konfirmasi password anda'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <?php include "layout/bawah.php" ?>
+    <script>
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bi bi-eye-slash");
+                    $('#show_hide_password i').removeClass("bi bi-eye");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bi bi-eye-slash");
+                    $('#show_hide_password i').addClass("bi bi-eye");
+                }
+            });
+            $("#show_hide_password_2 a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password_2 input').attr("type") == "text") {
+                    $('#show_hide_password_2 input').attr('type', 'password');
+                    $('#show_hide_password_2 i').addClass("bi bi-eye-slash");
+                    $('#show_hide_password_2 i').removeClass("bi bi-eye");
+                } else if ($('#show_hide_password_2 input').attr("type") == "password") {
+                    $('#show_hide_password_2 input').attr('type', 'text');
+                    $('#show_hide_password_2 i').removeClass("bi bi-eye-slash");
+                    $('#show_hide_password_2 i').addClass("bi bi-eye");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

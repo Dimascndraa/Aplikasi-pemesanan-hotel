@@ -77,7 +77,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                             <a href="ubah-fasilitas.php?id=<?= $superior['id'] ?>" class="btn w-100 btn-success">Ubah</a>
                                         </div>
                                         <div class="col-6 text-center">
-                                            <a onclick="return confirm('Yakin')" href="../logic/hapus-fasilitas.php?id=<?= $superior['id'] ?>" class="btn w-100 btn-danger">Hapus</a>
+                                            <a href="../logic/proses-hapus-fasilitas.php?id=<?= $superior['id'] ?>" class="btn w-100 btn-danger">Hapus</a>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                             <a href="../logic/ubah-fasilitas.php?id=<?= $deluxe['id'] ?>" class="btn w-100 btn-success">Ubah</a>
                                         </div>
                                         <div class="col-6 text-center">
-                                            <a onclick="return confirm('Yakin')" href="../logic/hapus-fasilitas.php?id=<?= $deluxe['id'] ?>" class="btn w-100 btn-danger">Hapus</a>
+                                            <a href="../logic/proses-hapus-fasilitas.php?id=<?= $deluxe['id'] ?>" class="btn w-100 btn-danger">Hapus</a>
                                         </div>
                                     </div>
                                 </div>
@@ -139,6 +139,81 @@ $hotel = query("SELECT * FROM identitas")[0];
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == 'berhasil-ubah-fasilitas') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Fasilitas berhasil diubah!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'berhasil-hapus-fasilitas') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Fasilitas berhasil dihapus!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'berhasil-tambah-fasilitas') : ?>
+            <script>
+                var delayInMilliseconds = 1000; //1 second
+
+                setTimeout(function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Fasilitas berhasil ditambahkan!'
+                    })
+                }, delayInMilliseconds);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <?php include "layout/bawah.php" ?>
 </body>

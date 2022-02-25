@@ -423,32 +423,6 @@ $jmlPembayaran = query("SELECT COUNT(*) FROM pembayaran")[0]["COUNT(*)"];
             </div>
         <?php endif; ?>
 
-        <?php if ($_GET['popup'] == "sg") : ?>
-            <div class="container">
-                <script>
-                    var delayInMilliseconds = 1000; //1 second
-
-                    setTimeout(function() {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
-
-                        Toast.fire({
-                            icon: 'error',
-                            title: 'Sosial media gagal diubah!'
-                        })
-                    }, delayInMilliseconds);
-                </script>
-            </div>
-        <?php endif; ?>
         <!-- Akhir Sosial Media -->
     <?php endif; ?>
 
