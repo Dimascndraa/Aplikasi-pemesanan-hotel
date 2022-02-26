@@ -57,7 +57,49 @@ $i = 1;
 
 
                     <div class="row mt-3">
+                        <div class="ms-2 mb-5 mt-3">
+                            <h5>Cetak</h5>
+                            <form action="print/print-data-pembayaran.php" method="POST">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <select required name="bulan" id="bulan" class="form-select w-100">
+                                            <option value="">-- Bulan --</option>
+                                            <option value="Januari">Januari</option>
+                                            <option value="Februari">Februari</option>
+                                            <option value="Maret">Maret</option>
+                                            <option value="April">April</option>
+                                            <option value="Mei">Mei</option>
+                                            <option value="Juni">Juni</option>
+                                            <option value="Juli">Juli</option>
+                                            <option value="Agustus">Agustus</option>
+                                            <option value="September">September</option>
+                                            <option value="Oktober">Oktober</option>
+                                            <option value="November">November</option>
+                                            <option value="Desember">Desember</option>
+                                        </select>
+                                    </div>
 
+                                    <div class="col-2">
+                                        <select required name="tahun" id="tahun" class="form-select w-100">
+                                            <option value="">-- Tahun --</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <button name="submit" type="submit" class="btn btn-primary d-block w-100" style="width: 10rem;"><i class="fas fa-print"></i> Cetak</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <?php if (count($dataPembayaran) > 0) : ?>
                             <table class="table datatab">
                                 <thead class="text-center bg-primary">
@@ -91,49 +133,6 @@ $i = 1;
                         <?php else : ?>
                             <h5 class="text-muted text-center"> *Belum ada pesanan </h5>
                         <?php endif; ?>
-                    </div>
-                    <div class="ms-2 mb-5 mt-3">
-                        <h5>Cetak</h5>
-                        <form action="print/print-data-pembayaran.php" method="POST">
-                            <div class="row">
-                                <div class="col-2">
-                                    <select required name="bulan" id="bulan" class="form-select w-100">
-                                        <option value="">-- Bulan --</option>
-                                        <option value="Januari">Januari</option>
-                                        <option value="Februari">Februari</option>
-                                        <option value="Maret">Maret</option>
-                                        <option value="April">April</option>
-                                        <option value="Mei">Mei</option>
-                                        <option value="Juni">Juni</option>
-                                        <option value="Juli">Juli</option>
-                                        <option value="Agustus">Agustus</option>
-                                        <option value="September">September</option>
-                                        <option value="Oktober">Oktober</option>
-                                        <option value="November">November</option>
-                                        <option value="Desember">Desember</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2">
-                                    <select required name="tahun" id="tahun" class="form-select w-100">
-                                        <option value="">-- Tahun --</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
-                                        <option value="2026">2026</option>
-                                        <option value="2027">2027</option>
-                                        <option value="2028">2028</option>
-                                        <option value="2029">2029</option>
-                                        <option value="2030">2030</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-2">
-                                    <button name="submit" type="submit" class="btn btn-primary d-block w-100" style="width: 10rem;"><i class="fas fa-print"></i> Cetak</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
