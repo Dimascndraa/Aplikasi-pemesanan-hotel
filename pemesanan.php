@@ -25,7 +25,7 @@ $hotel = query("SELECT * FROM identitas")[0];
 <?php include "layout/atas.php"; ?>
 
 <body style="background-color: #eaeaea;">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6998AB">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #174578">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['nama_hotel'] ?>"> <span class="bold"><?= $hotel['nama_hotel'] ?></span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -164,7 +164,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <button class="w-50 btn text-white btn-lg mb-5" style="background-color: #6998AB" name="submit" type="submit">Pesan</button>
+                                <button class="w-50 btn text-white btn-lg mb-5" style="background-color: #174578" name="submit" type="submit">Pesan</button>
                             </div>
                     </form>
                 </div>

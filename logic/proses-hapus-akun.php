@@ -49,18 +49,14 @@ $id = $_GET['id'];
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                document.location.href = "hapus-fasilitas.php?id=<?= $id; ?>";
+                document.location.href = "hapus-akun.php?id=<?= $id; ?>";
             } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
             ) {
-                <?php if ($_SESSION['level'] == "pelanggan") : ?>
-                    document.location.href = "../index.php";
-                <?php else : ?>
-                    document.location.href = "../admin/index.php";
-                <?php endif; ?>
+                document.location.href = "../profile.php";
             }
-        })
+        });
     </script>
 </body>
 

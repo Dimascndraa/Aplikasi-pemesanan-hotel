@@ -7,7 +7,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 
-include "logic/functions.php";
+include "functions.php";
 
 // jika tidak ada id di url
 if (!isset($_GET['id'])) {
@@ -21,10 +21,10 @@ $id = $_GET['id'];
 if (hapusAkun($id) > 0) {
     echo "<script>
           alert('data berhasil dihapus');
-          document.location.href = 'index.php';
+          document.location.href = '../index.php';
        </script>";
 } else {
     echo "data gagal dihapus!";
 }
 
-header("Location: logic/logout.php");
+header("Location: logout.php");

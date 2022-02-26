@@ -2,7 +2,7 @@
 session_start();
 include "logic/functions.php";
 if (!$_GET['page']) {
-    header("Location: ./index.php?page=index");
+    header("Location: ./profile.php?page=profile");
 }
 
 include "layout/cookie.php";
@@ -10,12 +10,11 @@ include "layout/cookie.php";
 if (isset($_POST['ubah'])) {
     if (ubahAkun($_POST) > 0) {
         echo "<script>
-                alert('Data berhasil diubah!');
-                document.location.href = './index.php?page=index';
-              </script>";
+                document.location.href = '?page=profile&pesan=berhasil';
+                </script>";
     } else {
         echo "<script>
-                alert('Data gagal diubah!');
+                document.location.href = '?page=profile&pesan=gagal';
               </script>";
     }
 }
@@ -108,7 +107,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                     <hr class="mb-5">
                                     <div class="row mb-5">
                                         <div class="col-12 text-center">
-                                            <a onclick="return confirm('Yakin')" href="hapus-akun.php?id=<?= $dataPelanggan['id'] ?>" style="background-color: #6998AB;" class="btn text-white">Hapus Akun</a>
+                                            <a href="logic/proses-hapus-akun.php?id=<?= $dataPelanggan['id'] ?>" style="background-color: #174578;" class="btn text-white">Hapus Akun</a>
                                         </div>
                                     </div>
                                 </div>
@@ -166,10 +165,15 @@ $hotel = query("SELECT * FROM identitas")[0];
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <button style="background-color: #6998AB;" class="btn text-white w-100 d-block mt-4" type="submit" name="ubah">Ubah</button>
+                                                <button style="background-color: #174578;" class="btn text-white w-100 d-block mt-4" type="submit" name="ubah">Ubah</button>
                                             </div>
                                             <div class="col-6">
-                                                <a href="ubah-password.php" style="background-color: #6998AB;" class="btn text-white d-block mt-4">Ubah Password</a>
+                                                <a href="ubah-password.php" style="background-color: #174578;" class="btn text-white d-block mt-4">Ubah Password</a>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12 text-center">
+                                                <a href="./" class="nav-link">Kembali ke halaman awal</a>
                                             </div>
                                         </div>
                                     </form>
@@ -184,6 +188,68 @@ $hotel = query("SELECT * FROM identitas")[0];
 
     <?php include "./layout/footer.php" ?>
 
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == 'ubah-password-berhasil') : ?>
+            <script>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Password berhasil diubah!'
+                })
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'berhasil') : ?>
+            <script>
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success m-3',
+                        cancelButton: 'btn btn-danger m-3'
+                    },
+                    buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Profil berhasil diubah!',
+                    text: "kembali ke halaman awal?",
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, kembali!',
+                    cancelButtonText: 'Tidak, tetap disini!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.location.href = "./";
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        document.location.href = "profile.php";
+                    }
+                });
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == "gagal") : ?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Profile gagal diubah!',
+                    text: 'Coba cek kembali data yang diinputkan!',
+                    footer: 'Atau mungkin anda tidak mengubah apapun'
+                })
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script>

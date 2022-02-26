@@ -3,18 +3,22 @@ session_start();
 include "data-cekin.php";
 include "layout/cookie.php";
 
-$cekin = $_POST['cekin'];
+$cekin = $_POST['cekin'] . " " . date("12:00:00");
 $cekout = $_POST['cekout'];
+$hariIni = date("Y-m-d H:i:s");
 
-var_dump($cekin);
-var_dump($cekout);
-
-$cekValidasi = $cekout > $cekin;
+$cekValidasi = $cekin > $hariIni;
+$cekValidasi2 = $cekout > $cekin;
 if (!$cekValidasi) {
     echo "<script>
-            document.location.href = './?page=dashboard&pesan=tgltdkvalid';
+            document.location.href = './kamar.php?page=kamar&pesan=tgl-cekin-salah';
+        </script>";
+} else if (!$cekValidasi2) {
+    echo "<script>
+            document.location.href = './kamar.php?page=kamar&pesan=tgltdkvalid';
         </script>";
 }
+
 
 $tipeKamar = $_POST["tipe-kamar"];
 $gambar = query("SELECT gambar FROM fasilitas WHERE tipe_kamar = '$tipeKamar'")[0]['gambar'];
@@ -27,7 +31,7 @@ $hotel = query("SELECT * FROM identitas")[0];
 <?php include "layout/atas.php"; ?>
 
 <body style="background-color: #eaeaea;">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6998AB">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #174578">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['nama_hotel'] ?>"> <span class="bold"><?= $hotel['nama_hotel'] ?></span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,7 +155,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                             <input name="total-biaya" type="hidden" value="<?= $totalBiaya; ?>">
                         <?php endfor; ?>
                         <div class="row justify-content-center mt-3">
-                            <button class="w-25 btn text-white btn-lg mb-5" style="background-color: #6998AB" name="pesan" type="submit">Pesan</button>
+                            <button class="w-25 btn text-white btn-lg mb-5" style="background-color: #174578" name="pesan" type="submit">Pesan</button>
                         </div>
                     </form>
                 </div>

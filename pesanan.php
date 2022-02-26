@@ -25,16 +25,9 @@ if (!$_SESSION['login']) {
 }
 
 if (isset($_POST['batal'])) {
-    if (batalkanPesanan($_POST) > 0) {
-        echo "<script>
-            alert('Pesanan Berhasil Dibatalkan');
-            document.location.href = './';
-        </script>";
-    } else {
-        echo "<script>
-        alert('Pesanan Gagal');
-        </script>";
-    }
+    echo "<script>
+                document.location.href = 'logic/proses-batal-pesanan.php?id=" . $_POST['id'] . "';
+            </script>";
 }
 
 if (isset($_POST['checkout'])) {
@@ -115,7 +108,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                         <div class="card" style="width: 98%; margin: auto;">
                             <div class="card-header">
                                 <?php if ($pesanan['status'] == "check out" || $pesanan['status'] == "batal") : ?>
-                                    <a onclick="return confirm('Yakin')" href="hapus-pesanan.php?id=<?= $pesanan['id'] ?>"><i class="fas fa-trash position-absolute text-secondary" style="right: 1rem; top: 1rem;"></i></a>
+                                    <a onclick="return konfirmasi()" href="javascript:void(0)"><i class="fas fa-trash position-absolute text-secondary" style="right: 1rem; top: 1rem;"></i></a>
                                 <?php endif; ?>
                                 <h5 class="text-center" style="font-size: 12pt;"><?= $pesanan['tipe_kamar'] ?></h5>
                                 <div class="d-block text-center" style="margin-top: -.7rem;">
@@ -270,7 +263,60 @@ $hotel = query("SELECT * FROM identitas")[0];
     </div>
 
     <?php include "layout/footer.php" ?>
+
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == "berhasil-dibatalkan") : ?>
+            <div class="container">
+                <script>
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Pesanan dibatalkan!'
+                    })
+                </script>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        var delayInMilliseconds = 1000; //1 second
+
+        function konfirmasi() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Terhapus!',
+                        'Pesanan berhasil dihapus.',
+                        'success'
+                    )
+                    setTimeout(function() {
+                        document.location.href = "hapus-pesanan.php?id=<?= $pesanan['id']; ?>";
+                    }, delayInMilliseconds);
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>

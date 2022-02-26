@@ -44,23 +44,19 @@ $id = $_GET['id'];
             text: "Anda bisa membatalkannya kapanpun!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Tidak, Batalkan!',
+            confirmButtonText: 'Ya, batalkan!',
+            cancelButtonText: 'Tidak, kembali!',
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                document.location.href = "hapus-fasilitas.php?id=<?= $id; ?>";
+                document.location.href = "batalkan-pesanan.php?id=<?= $id; ?>";
             } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
             ) {
-                <?php if ($_SESSION['level'] == "pelanggan") : ?>
-                    document.location.href = "../index.php";
-                <?php else : ?>
-                    document.location.href = "../admin/index.php";
-                <?php endif; ?>
+                document.location.href = "../pesanan.php?page=pesanan";
             }
-        })
+        });
     </script>
 </body>
 

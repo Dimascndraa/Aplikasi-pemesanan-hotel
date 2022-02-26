@@ -99,14 +99,14 @@ $hotel = query("SELECT * FROM identitas")[0];
                                             <?php if ($_SESSION['login'] == 1) : ?>
                                                 <?php if ($kamar['tipe'] == "Superior") : ?>
                                                     <input required name="jumlah-kamar" type="number" style="width: 30%; text-align: center;" class="form-control m-auto" placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarSuperior ?>">
-                                                    <button style="background-color: #6998AB;" class="btn text-white w-75 d-block m-auto mt-3" <?= $kamar['tipe'] == "Superior" && intval($kamarSuperior) < 1 ? 'disabled' : '' ?>>Pesan</button>
+                                                    <button style="background-color: #174578;" class="btn text-white w-75 d-block m-auto mt-3" <?= $kamar['tipe'] == "Superior" && intval($kamarSuperior) < 1 ? 'disabled' : '' ?>>Pesan</button>
                                                 <?php endif; ?>
                                                 <?php if ($kamar['tipe'] == "Deluxe") : ?>
                                                     <input required name="jumlah-kamar" type="number" style="width: 30%; text-align: center;" class="form-control m-auto" placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarDeluxe ?>">
-                                                    <button style="background-color: #6998AB;" class="btn text-white w-75 d-block m-auto mt-3" <?= $kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) < 1 ? 'disabled' : '' ?>>Pesan</button>
+                                                    <button style="background-color: #174578;" class="btn text-white w-75 d-block m-auto mt-3" <?= $kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) < 1 ? 'disabled' : '' ?>>Pesan</button>
                                                 <?php endif; ?>
                                             <?php else : ?>
-                                                <a href="./fasilitas.php" style="background-color: #6998AB;" class="btn text-white w-75 d-block m-auto mt-5">Lihat Fasilitas</a>
+                                                <a href="./fasilitas.php" style="background-color: #174578;" class="btn text-white w-75 d-block m-auto mt-5">Lihat Fasilitas</a>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </form>
@@ -120,6 +120,34 @@ $hotel = query("SELECT * FROM identitas")[0];
     </div>
 
     <?php include "layout/footer.php" ?>
+
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == "tgltdkvalid") : ?>
+            <div class="container">
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Pesanan gagal!',
+                        text: 'Format Tanggal tidak valid!',
+                        footer: 'Coba cek kembali format tanggal'
+                    })
+                </script>
+            </div>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == "tgl-cekin-salah") : ?>
+            <div class="container">
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Pesanan gagal!',
+                        text: 'Tanggal Checkin tidak boleh lebih kecil dari tanggal sekarang!',
+                        footer: 'atau lebih dari jam 12 siang'
+                    })
+                </script>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 

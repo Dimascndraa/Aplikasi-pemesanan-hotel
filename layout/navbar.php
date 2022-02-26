@@ -1,6 +1,6 @@
 <?php $hotel = query("SELECT * FROM identitas")[0]; ?>
 <?php if ($_SESSION['login'] == 1) : ?>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6998AB;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #174578;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['logo_primary'] ?>"> <span class="bold"><?= $hotel['nama_hotel'] ?></span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
         </div>
     </nav>
 <?php else : ?>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6998AB;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #174578;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['nama_hotel'] ?>"> <span class="bold"><?= $hotel['nama_hotel'] ?></span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

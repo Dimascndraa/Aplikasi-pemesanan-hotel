@@ -19,6 +19,11 @@ $hotel = query("SELECT * FROM identitas")[0];
     <script src="script.js"></script>
     <link href='../img/logo/<?= $hotel['logo_primary'] ?>' rel='shortcut icon'>
     <title><?= $hotel['nama_hotel'] ?>!</title>
+    <style>
+        body {
+            background-image: url('../img/pattern.png');
+        }
+    </style>
 </head>
 
 <body>
@@ -37,7 +42,6 @@ $hotel = query("SELECT * FROM identitas")[0];
             title: 'Anda yakin ingin Keluar?',
             text: "Anda bisa membatalkannya kapanpun!",
             icon: 'warning',
-            backdrop: '#6998AB',
             showCancelButton: true,
             confirmButtonText: 'Ya, Keluar!',
             cancelButtonText: 'Tidak, Batalkan!',

@@ -7,7 +7,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 
-include "logic/functions.php";
+include "functions.php";
 
 // jika tidak ada id di url
 if (!isset($_GET['id'])) {
@@ -18,9 +18,10 @@ if (!isset($_GET['id'])) {
 // mengambil id dari url
 $id = $_GET['id'];
 
-if (hapusPesanan($id) > 0) {
+$data = query("SELECT * FROM pemesanan WHERE id = $id")[0];
+if (batalkanPesanan($data) > 0) {
     echo "<script>
-            document.location.href = './pesanan.php?page=pesanan';
+            document.location.href = '../pesanan.php?page=pesanan&pesan=berhasil-dibatalkan';
        </script>";
 } else {
     echo "data gagal dihapus!";

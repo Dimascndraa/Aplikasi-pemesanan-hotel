@@ -113,7 +113,7 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
                 </script>
             </div>
         <?php endif; ?>
-        <?php if ($_GET['pesan'] == "logout") : ?>
+        <?php if ($_GET['pesan'] == "berhasil-logout") : ?>
             <div class="container">
                 <script>
                     const Toast = Swal.mixin({
@@ -131,18 +131,6 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
                     Toast.fire({
                         icon: 'success',
                         title: 'Anda berhasil Keluar!'
-                    })
-                </script>
-            </div>
-        <?php endif; ?>
-        <?php if ($_GET['pesan'] == "tgltdkvalid") : ?>
-            <div class="container">
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Pesanan gagal!',
-                        text: 'Format Tanggal tidak valid!',
-                        footer: 'Coba cek kembali format tanggal'
                     })
                 </script>
             </div>

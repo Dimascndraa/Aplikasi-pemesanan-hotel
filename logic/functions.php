@@ -303,7 +303,7 @@ function ubahPassword($data)
 
     $id = htmlspecialchars($data['id']);
     $passwordLama = htmlspecialchars(hash('sha256', $data['password-lama']));
-    $passwordBaru = htmlspecialchars($data['password']);
+    $passwordBaru = htmlspecialchars($data['password-baru']);
     $konfirmasiPassword = htmlspecialchars($data['konfirmasi-password']);
 
     $result = mysqli_query($koneksi, "SELECT password FROM pelanggan WHERE id = $id");
@@ -311,15 +311,31 @@ function ubahPassword($data)
 
     if ($passwordLama !== $row['password']) {
         echo "<script>
-        alert('Password lama tidak sesuai');
+        document.location.href = '?page=profile&pesan=password-lama-salah';
         </script>";
+        $_SESSION['password-lama'] = $_POST['password-lama'];
+        $_SESSION['password-baru'] = $_POST['password-baru'];
+        $_SESSION['konfirmasi-password'] = $_POST['konfirmasi-password'];
+        return false;
+    }
+
+    if ($passwordLama === $passwordBaru) {
+        echo "<script>
+        document.location.href = '?page=profile&pesan=password-sama';
+        </script>";
+        $_SESSION['password-lama'] = $_POST['password-lama'];
+        $_SESSION['password-baru'] = $_POST['password-baru'];
+        $_SESSION['konfirmasi-password'] = $_POST['konfirmasi-password'];
         return false;
     }
 
     if ($passwordBaru !== $konfirmasiPassword) {
         echo "<script>
-        alert('Konfirmasi password tidak sesuai');
+        document.location.href = '?page=profile&pesan=konfirmasi-password-salah';
         </script>";
+        $_SESSION['password-lama'] = $_POST['password-lama'];
+        $_SESSION['password-baru'] = $_POST['password-baru'];
+        $_SESSION['konfirmasi-password'] = $_POST['konfirmasi-password'];
         return false;
     }
 
@@ -430,9 +446,9 @@ function batalkanPesanan($data)
     global $koneksi;
 
     $id = htmlspecialchars($data['id']);
-    $tipeKamar = htmlspecialchars($data['tipe-kamar']);
-    $jumlahKamar = htmlspecialchars($data['jumlah-kamar']);
-    $tglPemesanan = htmlspecialchars($data['tgl-pemesanan']);
+    $tipeKamar = htmlspecialchars($data['tipe_kamar']);
+    $jumlahKamar = htmlspecialchars($data['jumlah_kamar']);
+    $tglPemesanan = htmlspecialchars($data['tgl_pemesanan']);
     $data = query("SELECT * FROM kamar WHERE tgl_pemesanan = '$tglPemesanan'");
 
     mysqli_query($koneksi, "UPDATE stok_kamar SET stok = stok+$jumlahKamar WHERE tipe = '$tipeKamar'");

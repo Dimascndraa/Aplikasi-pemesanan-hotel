@@ -29,12 +29,17 @@ $hotel = query("SELECT * FROM identitas")[0];
 
   <link href='../img/logo/<?= $hotel['logo_primary'] ?>' rel='shortcut icon'>
   <title>Buat Akun</title>
+  <style>
+    body {
+      background-image: url('../img/pattern.png');
+    }
+  </style>
 </head>
 
 <body class="bg-primary">
 
   <div class="container my-5">
-    <div class="daftar card m-auto">
+    <div class="daftar card m-auto" style="background: #eaeaea;">
       <main class="mt-5">
         <div class="text-center">
           <img class="d-block mx-auto mb-4" src="../img/logo/<?= $hotel['logo_primary'] ?>" alt="Logo" width="100">
@@ -98,8 +103,8 @@ $hotel = query("SELECT * FROM identitas")[0];
                     </select>
                   </div>
                   <hr class="my-4">
-                  <button class="w-100 btn btn-primary btn-lg" name="register" type="submit">Daftar</button>
-                  <a class="nav-link  text-center mb-5" href="./login.php">Atau sudah punya akun?</a>
+                  <button class="w-100 btn text-white btn-lg" style="background: #174578;" name="register" type="submit">Daftar</button>
+                  <a class="nav-link text-center mb-5" style="color: #174578;" href="./login.php">Atau sudah punya akun?</a>
                 </div>
             </form>
           </div>
@@ -139,7 +144,7 @@ $hotel = query("SELECT * FROM identitas")[0];
             icon: 'error',
             title: 'Daftar Gagal',
             text: 'Konfirmasi password tidak sesuai!',
-            footer: 'Silahkan cek kembali passwor yang diinputkan!'
+            footer: 'Silahkan cek kembali password yang diinputkan!'
             })
           </script>";
     }

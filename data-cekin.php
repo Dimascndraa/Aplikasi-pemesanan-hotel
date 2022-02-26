@@ -9,7 +9,13 @@ $alamat = $_POST['alamat'];
 $telp = $_POST['telp'];
 $cekin = $_POST['cekin'];
 $cekout = $_POST['cekout'];
+
+$tgl1 = new DateTime("$cekin");
+$tgl2 = new DateTime("$cekout");
+$selisih = $tgl2->diff($tgl1);
+
+$durasi = $selisih->days;
+
 $harga = intval(substr($_POST['harga'], 0, 7));
-$durasi = substr($_POST['cekout'], 8) - substr($_POST['cekin'], 8);
 $jmlkamar = intval($_POST['jumlah-kamar']);
 $totalBiaya = rupiah($harga * $durasi * $jmlkamar . "000");

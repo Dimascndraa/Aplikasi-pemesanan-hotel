@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark w-100" style="background-color: #6998AB;">
+<nav class="navbar navbar-expand-lg navbar-dark w-100" style="background-color: #174578;">
     <div class="container-fluid justify-content-center">
         <div class="row justify-content-center">
             <div class="col-12">

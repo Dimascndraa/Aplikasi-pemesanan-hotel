@@ -31,12 +31,17 @@ $hotel = query("SELECT * FROM identitas")[0];
   <!-- Sweet Alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Login</title>
+  <style>
+    body {
+      background-image: url('../img/pattern.png');
+    }
+  </style>
 </head>
 
-<body style="background-color: #6998AB;">
+<body>
 
   <div class="container overflow-hidden mt-lg-5">
-    <div class="card bg-white my-2">
+    <div class="card my-2" style="background: #eaeaea;">
       <div class="row">
         <div class="col-lg-5 pt-5 text-center">
           <img src="../img/logo/<?= $hotel['logo_primary'] ?>" class="logo" alt="Logo SMKN 1 Kadipaten">
@@ -69,11 +74,11 @@ $hotel = query("SELECT * FROM identitas")[0];
                   </div>
                 </div>
                 <div class="my-3">
-                  <button style="background-color: #6998AB;" class="btn text-white w-100" type="submit" name="login">Login</button>
+                  <button style="background-color: #174578;" class="btn text-white w-100" type="submit" name="login">Login</button>
                 </div>
-                <a style="color: #6998AB;" href="./register.php" class="lg nav-link text-center">Belum punya akun? Daftar sekarang</a>
-                <a style="color: #6998AB;" href="./register.php" class="sm nav-link text-center">Daftar?</a>
-                <a style="color: #6998AB;" href="../index.php" class="nav-link text-center">Kembali ke halaman awal</a>
+                <a style="color: #174578;" href="./register.php" class="lg nav-link text-center">Belum punya akun? Daftar sekarang</a>
+                <a style="color: #174578;" href="./register.php" class="sm nav-link text-center">Daftar?</a>
+                <a style="color: #174578;" href="../index.php" class="nav-link text-center">Kembali ke halaman awal</a>
               </form>
             </div>
           </div>

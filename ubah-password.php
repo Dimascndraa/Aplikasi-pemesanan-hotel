@@ -10,12 +10,11 @@ include "layout/cookie.php";
 if (isset($_POST['ubah'])) {
     if (ubahPassword($_POST) > 0) {
         echo "<script>
-                alert('Password berhasil diubah!');
-                document.location.href = './index.php?page=index';
-              </script>";
+                document.location.href = './profile.php?page=profile&pesan=ubah-password-berhasil';
+                </script>";
     } else {
         echo "<script>
-                alert('Password gagal diubah!');
+                document.location.href = '?page=profile&pesan=ubah-password-gagal';
               </script>";
     }
 }
@@ -121,22 +120,42 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <input type="hidden" name="id" id="id" value="<?= $dataPelanggan['id'] ?>">
                                         <div class="mb-3">
                                             <label for="password-lama" class="form-label fw-bold">Password Lama</label>
-                                            <input style="background-color: #e8f0fe;" type="password" class="form-control" name="password-lama" id="password-lama" placeholder="Password Lama">
+                                            <div class="input-group" id="show_hide_password">
+                                                <input type="password" style="background-color: #e8f0fe;" name='password-lama' id="password-lama" class="form-control" value="<?= @$_SESSION['password-lama'] ?>" required placeholder="Password Lama">
+                                                <div class="input-group-append">
+                                                    <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="password" class="form-label fw-bold">Password Baru</label>
-                                            <input style="background-color: #e8f0fe;" type="password" class="form-control" name="password" id="password" placeholder="Password Baru">
+                                            <label for="password-baru" class="form-label fw-bold">Password Baru</label>
+                                            <div class="input-group" id="show_hide_password_2">
+                                                <input type="password" style="background-color: #e8f0fe;" name='password-baru' id="password-baru" class="form-control" value="<?= @$_SESSION['password-baru'] ?>" required placeholder="Password Baru">
+                                                <div class="input-group-append">
+                                                    <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="konfirmasi-password" class="form-label fw-bold">Konfirmasi Password Baru</label>
-                                            <input style="background-color: #e8f0fe;" type="password" class="form-control" name="konfirmasi-password" id="konfirmasi-password" placeholder="Konfirmasi Password Baru">
+                                            <div class="input-group" id="show_hide_password_3">
+                                                <input type="password" style="background-color: #e8f0fe;" name='konfirmasi-password' id="konfirmasi-password" class="form-control" value="<?= @$_SESSION['konfirmasi-password'] ?>" required placeholder="Konfirmasi Password Baru">
+                                                <div class="input-group-append">
+                                                    <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <button type="submit" name="ubah" style="background-color: #6998AB" class="btn text-white d-block mt-4">Ubah Password</button>
+                                                <button type="submit" name="ubah" style="background-color: #174578" class="btn text-white d-block mt-4">Ubah Password</button>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <a href="./profile.php?page=profile" class="ps-0 nav-link">Kembali ke halaman sebelumnya</a>
                                             </div>
                                         </div>
                                     </form>
@@ -150,6 +169,29 @@ $hotel = query("SELECT * FROM identitas")[0];
     </div>
 
     <?php include "./layout/footer.php" ?>
+
+    <?php if (isset($_GET['pesan'])) : ?>
+        <?php if ($_GET['pesan'] == 'password-lama-salah') : ?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops..!',
+                    text: 'Password gagal diubah!',
+                    footer: 'Password lama tidak sesuai!'
+                })
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == 'konfirmasi-password-salah') : ?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops..!',
+                    text: 'Password gagal diubah!',
+                    footer: 'Konfirmasi password tidak sesuai!'
+                })
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
@@ -165,6 +207,30 @@ $hotel = query("SELECT * FROM identitas")[0];
                     $('#show_hide_password input').attr('type', 'text');
                     $('#show_hide_password i').removeClass("bi bi-eye-slash");
                     $('#show_hide_password i').addClass("bi bi-eye");
+                }
+            });
+            $("#show_hide_password_2 a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password_2 input').attr("type") == "text") {
+                    $('#show_hide_password_2 input').attr('type', 'password');
+                    $('#show_hide_password_2 i').addClass("bi bi-eye-slash");
+                    $('#show_hide_password_2 i').removeClass("bi bi-eye");
+                } else if ($('#show_hide_password_2 input').attr("type") == "password") {
+                    $('#show_hide_password_2 input').attr('type', 'text');
+                    $('#show_hide_password_2 i').removeClass("bi bi-eye-slash");
+                    $('#show_hide_password_2 i').addClass("bi bi-eye");
+                }
+            });
+            $("#show_hide_password_3 a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password_3 input').attr("type") == "text") {
+                    $('#show_hide_password_3 input').attr('type', 'password');
+                    $('#show_hide_password_3 i').addClass("bi bi-eye-slash");
+                    $('#show_hide_password_3 i').removeClass("bi bi-eye");
+                } else if ($('#show_hide_password_3 input').attr("type") == "password") {
+                    $('#show_hide_password_3 input').attr('type', 'text');
+                    $('#show_hide_password_3 i').removeClass("bi bi-eye-slash");
+                    $('#show_hide_password_3 i').addClass("bi bi-eye");
                 }
             });
         });
