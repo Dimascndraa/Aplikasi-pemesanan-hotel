@@ -31,7 +31,37 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../src/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../src/dist/js/pages/dashboard.js"></script>
-<!-- Data Tables -->
-<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="../src/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../src/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../src/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../src/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../src/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../src/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../src/plugins/jszip/jszip.min.js"></script>
+<script src="../src/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../src/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../src/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../src/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../src/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<script src="../src/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+
+<script src="../src/dist/js/adminlte.min.js?v=3.2.0"></script>
+
+<script src="../src/dist/js/demo.js"></script>
+
+<script>
+    $(function() {
+        $("#datatab").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            }, "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>

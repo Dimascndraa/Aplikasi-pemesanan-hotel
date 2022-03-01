@@ -69,12 +69,13 @@ $level = $data['role'];
                             <div class="container">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
-                                        <div class="card p-2">
-                                            <div class="card-body text-center">
+                                        <div class="card card-primary card-outline p-2">
+                                            <div class="card-body box-profile text-center">
                                                 <img src="../img/profil/<?= $data['foto'] ?>" class="img-fluid rounded-circle img-preview" alt="">
                                             </div>
                                             <div class="card-header">
-                                                <h5 class="text-center"><?= $data['nama'] ?></h5>
+                                                <h5 class="text-center profile-username"><?= $data['nama'] ?></h5>
+                                                <p class="text-muted text-center"><?= ucfirst($data['role']) ?></p>
                                             </div>
                                             <div class="card-header">
                                                 <span class="d-block text-center fw-bold">Username</span>
@@ -88,14 +89,10 @@ $level = $data['role'];
                                                 <span class="d-block text-center fw-bold">No Handphone</span>
                                                 <span class="d-block text-center"><?= $data['telp'] ?></span>
                                             </div>
-                                            <div class="card-header mb-3">
-                                                <span class="d-block text-center fw-bold">Role</span>
-                                                <span class="d-block text-center"><?= $data['role'] ?></span>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-9 mb-3">
-                                        <div class="card px-5 pt-3">
+                                        <div class="card card-primary card-outline px-5 pt-3">
                                             <input type="hidden" name="id" value="<?= $data['id'] ?>">
                                             <input type="hidden" name="foto-lama" value="<?= $data['foto'] ?>">
                                             <input type="hidden" name="jenis-kelamin" value="<?= $data['jenis_kelamin'] ?>">

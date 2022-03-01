@@ -55,7 +55,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                     <div class="container">
                         <div class="row mt-5"></div>
                         <div class="col-lg-8 m-auto">
-                            <div class="card">
+                            <div class="card card-primary card-outline">
                                 <div class="row">
                                     <div class="col-lg-5">
                                         <img src="../img/profil/<?= $data['foto'] ?>" class="img-circle p-4 w-100 d-block ml-auto" alt="<?= $data['foto']; ?>">

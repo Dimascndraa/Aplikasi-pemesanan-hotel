@@ -123,7 +123,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <button class="w-50 btn text-white btn-lg mb-5" style="background-color: #6998AB" name="bayar" type="submit">Bayar</button>
+                                    <button class="w-50 btn text-white btn-lg mb-5" style="background-color: #174578" name="bayar" type="submit">Bayar</button>
                                 </div>
                             </div>
                         </div>

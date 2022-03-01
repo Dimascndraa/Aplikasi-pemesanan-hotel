@@ -13,7 +13,7 @@
 .gambar-slider-1 {
   height: 10rem;
   width: 5vw;
-  background: url(img/satu.jpg) rgba(0, 0, 0, 0.4);
+  background: url(img/satu.png) rgba(0, 0, 0, 0.4);
   background-repeat: no-repeat;
   filter: brightness(50%);
   background-size: cover;

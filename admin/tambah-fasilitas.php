@@ -57,7 +57,7 @@ if ($data['role'] == "resepsionis") {
                 <div class="container-fluid">
 
                     <form action="proses-tambah-fasilitas.php?page=tambah-fasilitas" method="post" autocomplete="off">
-                        <div class="container card p-5 col-lg-8">
+                        <div class="container card card-primary card-outline p-5 col-lg-8">
 
                             <div class="row justify-content-center mb-3">
                                 <div class="col-lg-12 text-center">

@@ -14,9 +14,9 @@ include "../logic/functions.php";
 $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
 
-$dataKamarSuperior = query("SELECT * FROM kamar WHERE jenis_kamar = 'superior'");
-$dataKamarDeluxe = query("SELECT * FROM kamar WHERE jenis_kamar = 'deluxe'");
+$dataKamar = query("SELECT * FROM kamar ORDER BY no_kamar ASC");
 $hotel = query("SELECT * FROM identitas")[0];
+$i = 1;
 ?>
 
 <?php include 'layout/atas.php' ?>
@@ -55,56 +55,47 @@ $hotel = query("SELECT * FROM identitas")[0];
             <section class="content">
                 <div class="container-fluid p-5">
 
-                    <button class="btn fs-4 text-center d-block m-auto position-relative">
-                        Superior
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                            <?= count($dataKamarSuperior) ?>
-                        </span>
-                    </button>
-                    <hr class="w-25 m-auto">
-                    <a href="print/print-data-kamar-superior.php" target="_blank" class="btn btn-primary d-block" style="width: 10rem;"><i class="fas fa-print"></i> Cetak</a>
-                    <div class="row g-2 mt-1 mb-5">
-                        <?php foreach ($dataKamarSuperior as $kamarSuperior) : ?>
-                            <div class="col-lg-3">
-                                <div class="card">
-                                    <img src="../img/fasilitas/<?= $kamarSuperior['gambar'] ?>" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="text-center"><strong><?= ucfirst($kamarSuperior['jenis_kamar']) ?></strong></h5>
-
-                                        <p class="card-text text-center">Status: <?= ucfirst($kamarSuperior['status']) ?></p>
-                                        <p style="margin-top: -1rem;" class="card-text text-center">Harga: Rp.<?= rupiah($kamarSuperior['tarif']) ?></p>
-                                        <p style="margin-top: -1rem;" class="card-text text-center">Nomor Kamar: <?= $kamarSuperior['no_kamar'] ?></p>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Kamar</h3>
+                        </div>
+                        <?php if (count($dataKamar) > 0) : ?>
+                            <div class="card-body">
+                                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="datatab" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                                <thead class="text-center bg-primary">
+                                                    <tr>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Tipe Kamar</th>
+                                                        <th scope="col">Nomor Kamar</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Harga Permalam</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($dataKamar as $kamar) : ?>
+                                                        <tr class="text-center bg-white">
+                                                            <td><?= $i++; ?></td>
+                                                            <td><?= ucfirst($kamar['jenis_kamar']) ?></td>
+                                                            <td><?= intval($kamar['no_kamar']) ?></td>
+                                                            <td><?= $kamar['status'] ?></td>
+                                                            <td><?= $kamar['tarif'] ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+
+                        <?php else : ?>
+                            <h5 class="text-muted text-center"> *Belum ada pesanan </h5>
+                        <?php endif; ?>
+
                     </div>
-
-                    <button class="btn fs-4 text-center d-block m-auto position-relative">
-                        Deluxe
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                            <?= count($dataKamarDeluxe) ?>
-                        </span>
-                    </button>
-                    <hr class="w-25 m-auto">
-                    <a href="print/print-data-kamar-deluxe.php" target="_blank" class="btn btn-primary d-block" style="width: 10rem;"><i class="fas fa-print"></i> Cetak</a>
-                    <div class="row g-2 mt-1">
-                        <?php foreach ($dataKamarDeluxe as $kamarDeluxe) : ?>
-                            <div class="col-lg-3">
-                                <div class="card">
-                                    <img src="../img/fasilitas/<?= $kamarDeluxe['gambar'] ?>" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="text-center"><strong><?= ucfirst($kamarDeluxe['jenis_kamar']) ?></strong></h5>
-
-                                        <p class="card-text text-center">Status: <?= ucfirst($kamarDeluxe['status']) ?></p>
-                                        <p style="margin-top: -1rem;" class="card-text text-center">Harga: Rp.<?= rupiah($kamarDeluxe['tarif']) ?></p>
-                                        <p style="margin-top: -1rem;" class="card-text text-center">Nomor Kamar: <?= $kamarDeluxe['no_kamar'] ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->

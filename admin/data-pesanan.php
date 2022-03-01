@@ -92,7 +92,6 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <td><?= ucfirst($pemesanan['status']) ?></td>
                                         <td>
                                             <a href="detail-pemesanan.php?id=<?= $pemesanan['id']; ?>" class="btn btn-primary mx-2">Detail</a>
-                                            <a href="../logic/hapus-pemesanan.php?id=<?= $pemesanan['id']; ?>" class="btn btn-danger mx-2">Hapus</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

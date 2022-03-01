@@ -2,7 +2,6 @@
 include "logic/functions.php";
 
 $tipe = $_POST['tipe-kamar'];
-$harga = $_POST['harga'];
 $jumlah = $_POST['jumlah-kamar'];
 $nama = $_POST['nama'];
 $alamat = $_POST['alamat'];
@@ -16,6 +15,6 @@ $selisih = $tgl2->diff($tgl1);
 
 $durasi = $selisih->days;
 
-$harga = intval(substr($_POST['harga'], 0, 7));
+// $harga = intval(substr($_POST['harga'], 0, 7));
 $jmlkamar = intval($_POST['jumlah-kamar']);
-$totalBiaya = rupiah($harga * $durasi * $jmlkamar . "000");
+$totalBiaya = $_POST['harga'] . ",00";

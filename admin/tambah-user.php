@@ -72,7 +72,7 @@ if (isset($_POST['tambah'])) {
             <section class="content">
                 <div class="container-fluid">
 
-                    <div class="container card p-5 col-lg-8">
+                    <div class="container card card-primary card-outline p-5 col-lg-8">
                         <h3 class="text-center">Tambah Petugas</h3>
                         <form action="" method="post" enctype="multipart/form-data">
 

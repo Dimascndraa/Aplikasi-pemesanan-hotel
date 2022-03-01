@@ -57,7 +57,7 @@ if ($data['role'] == "resepsionis") {
             <section class="content">
                 <div class="container-fluid">
 
-                    <div class="container card p-5 col-lg-8">
+                    <div class="container card card-primary card-outline p-5 col-lg-8">
                         <h3 class="text-center">Tambah Data Kamar</h3>
                         <form action="proses-tambah-kamar.php?page=input-kamar" method="post" autocomplete="off">
 

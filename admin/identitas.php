@@ -88,7 +88,7 @@ if ($data['role'] == "resepsionis") {
                     <?php
                     ?>
 
-                    <div class="card pb-5" style="background-color: #eeeeea;">
+                    <div class="card card-primary card-outline  pb-5" style="background-color: #eeeeea;">
                         <h1 class="text-center pt-4"><?= $hotel['nama_hotel'] ?></h1>
                         <div class="row justify-content-center p-lg-5 m-auto">
                             <div class="col-12 col-lg-6 mt-lg-0 mt-5">
@@ -106,7 +106,7 @@ if ($data['role'] == "resepsionis") {
 
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="card p-3">
+                            <div class="card card-primary card-outline p-3">
                                 <div class="card-header">
                                     <h5 class="text-start">Identitas Hotel</h5>
                                 </div>
@@ -134,7 +134,7 @@ if ($data['role'] == "resepsionis") {
                         </div>
 
                         <div class="col-lg-8">
-                            <div class="card p-3">
+                            <div class="card card-primary card-outline p-3">
                                 <div class="card-header">
                                     <h5 class="text-start">Ubah Identitas</h5>
                                 </div>
@@ -178,7 +178,7 @@ if ($data['role'] == "resepsionis") {
 
                         <div class="row">
                             <div class="col-lg-4">
-                                <div class="card p-3">
+                                <div class="card card-primary card-outline p-3">
                                     <div class="card-header">
                                         <h5 class="text-start">Sosial Media</h5>
                                     </div>
@@ -206,7 +206,7 @@ if ($data['role'] == "resepsionis") {
                             </div>
 
                             <div class="col-lg-8">
-                                <div class="card p-3">
+                                <div class="card card-primary card-outline p-3">
                                     <div class="card-header">
                                         <h5 class="text-start">Sosial Media</h5>
                                     </div>
@@ -237,8 +237,9 @@ if ($data['role'] == "resepsionis") {
                                     </form>
                                 </div>
                             </div>
+                        </div>
 
-                        </div><!-- /.container-fluid -->
+                    </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
         </div>

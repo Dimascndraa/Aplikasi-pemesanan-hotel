@@ -70,8 +70,10 @@ $hotel = query("SELECT * FROM identitas")[0];
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <img src="img/fasilitas/<?= $kamar['gambar'] ?>" class="card-img-top" alt="<?= $kamar['gambar'] ?>">
+                        <div class="card-header">
+                            <h5 class="text-center my-3 "><?= $kamar['tipe'] ?></h5>
+                        </div>
                         <div class="card-body">
-                            <h5 class="text-center mb-3 card-title"><?= $kamar['tipe'] ?></h5>
 
                             <?php if ($_SESSION['login'] == 1) : ?>
                                 <?php if ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) > 1) : ?>

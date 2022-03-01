@@ -20,8 +20,7 @@ $id = $_GET['id'];
 
 if (hapusPembayaran($id) > 0) {
     echo "<script>
-          alert('data berhasil dihapus');
-          document.location.href = '../admin/index.php';
+          document.location.href = '../admin/data-pembayaran.php?page=data-pembayaran&pesan=berhasil-hapus-pembayaran';
        </script>";
 } else {
     echo "data gagal dihapus!";

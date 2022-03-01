@@ -123,15 +123,15 @@ $i = 1;
                                             <td><?= $pembayaran['bank'] ?></td>
                                             <td><?= $pembayaran['no_rekening'] ?></td>
                                             <td>
-                                                <a href="detail-pembayaran.php?id=<?= $pembayaran['id']; ?>" class="btn btn-primary mx-2">Detail</a>
-                                                <a href="../logic/hapus-pembayaran.php?id=<?= $pembayaran['id']; ?>" class="btn btn-danger mx-2">Hapus</a>
+                                                <a href="detail-pembayaran.php?page=data-pembayaran&id=<?= $pembayaran['id']; ?>" class="btn btn-primary mx-2">Detail</a>
+                                                <a href="../logic/proses-hapus-pembayaran.php?id=<?= $pembayaran['id']; ?>" class="btn btn-danger mx-2">Hapus</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                         <?php else : ?>
-                            <h5 class="text-muted text-center"> *Belum ada pesanan </h5>
+                            <h5 class="text-muted text-center"> *Belum ada pembayaran</h5>
                         <?php endif; ?>
                     </div>
                 </div><!-- /.container-fluid -->

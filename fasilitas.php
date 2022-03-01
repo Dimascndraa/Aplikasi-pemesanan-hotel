@@ -53,42 +53,89 @@ $hotel = query("SELECT * FROM identitas")[0];
             </button>
         </div>
 
-        <h1 class="my-5 ">Fasilitas</h1>
-        <h5 class="text-center mb-3">Superior</h5>
-        <hr>
-        <div class="row mb-5 g-3 justify-content-center">
-            <?php foreach ($dataSuperior as $superior) : ?>
-                <div class="col-10 col-lg-4">
-                    <div class="card" style="height: 26rem;">
-                        <img src="./img/fasilitas/<?= $superior["gambar"] ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $superior["fasilitas"] ?></h5>
-                            <p class="card-text mt-3" style="text-align: justify;"><?= $superior["deskripsi"] ?></p>
-                        </div>
+        <h1 class="mt-5">Fasilitas</h1>
+        <div class="card card-primary card-outline card-outline-tabs mb-5">
+            <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#superior" role="tab" aria-controls="superior" aria-selected="true">Superior</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#deluxe" role="tab" aria-controls="deluxe" aria-selected="false">Deluxe</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                    <div class="tab-pane fade active show" id="superior" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                        <?php foreach ($dataSuperior as $superior) : ?>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="img/fasilitas/<?= $superior['gambar'] ?>" data-toggle="lightbox" data-title="<?= $superior['fasilitas'] ?>" data-gallery="gallery" data-footer="<?= $superior['deskripsi'] ?>">
+                                        <img src="img/fasilitas/<?= $superior['gambar'] ?>" class="img-fluid" alt="Responsive image">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <h5><?= $superior['fasilitas'] ?></h5>
+                                    <p><?= $superior['deskripsi'] ?></p>
+                                </div>
+                            </div>
+                            <hr>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="tab-pane fade" id="deluxe" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                        <?php foreach ($dataDeluxe as $deluxe) : ?>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="img/fasilitas/<?= $deluxe['gambar'] ?>" data-toggle="lightbox" data-title="<?= $deluxe['fasilitas'] ?>" data-gallery="gallery">
+                                        <img src="img/fasilitas/<?= $deluxe['gambar'] ?>" class="img-fluid" alt="Responsive image">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <h5><?= $deluxe['fasilitas'] ?></h5>
+                                    <p><?= $deluxe['deskripsi'] ?></p>
+                                </div>
+                            </div>
+                            <hr>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
+            </div>
 
-        <h5 class="text-center mb-3">Deluxe</h5>
-        <hr>
-        <div class="row mb-5 g-3 justify-content-center">
-            <?php foreach ($dataDeluxe as $deluxe) : ?>
-                <div class="col-10 col-lg-4">
-                    <div class="card" style="height: 26rem;">
-                        <img src="./img/fasilitas/<?= $deluxe["gambar"] ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $deluxe["fasilitas"] ?></h5>
-                            <p class="card-text mt-3" style="text-align: justify;"><?= $deluxe["deskripsi"] ?></p>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
         </div>
     </div>
 
     <?php include "layout/footer.php" ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="src/plugins/jquery/jquery.min.js"></script>
+
+    <script src="src/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="src/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+
+    <script src="src/dist/js/adminlte.min.js?v=3.2.0"></script>
+
+    <script src="src/plugins/filterizr/jquery.filterizr.min.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+    <script>
+        $(function() {
+            $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+
+            $('.filter-container').filterizr({
+                gutterPixels: 3
+            });
+            $('.btn[data-filter]').on('click', function() {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+            });
+        })
+    </script>
 </body>
 
 </html>
